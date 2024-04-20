@@ -1,27 +1,29 @@
+import { TasksRepositoryContract } from '@/application/repositories/contracts/tasks/tasks.repository'
+import { TasksRepository } from '@/application/repositories/in-memory/tasks.repository'
 import { describe, expect, it } from 'vitest'
 
 class CreateTaskUseCase {
-  constructor() {}
+	constructor(private tasksRepository: TasksRepositoryContract) {}
 
-  execute(data: any) {
-    return {
-      id: 'task1',
-      ...data,
-    }
-  }
+	async execute(data: any) {
+		const task = await this.tasksRepository.create(data)
+		return task
+	}
 }
 
 describe('Create Task', () => {
-  it('should create a task', () => {
-    const task = {
-      title: 'Task 1',
-      completed: false,
-    }
+	it('should create a task', async () => {
+		const task = {
+			title: 'Task 1',
+			completed: false,
+		}
 
-    const createTaskUseCase = new CreateTaskUseCase()
+		const tasksRepository = TasksRepository.getInstance()
 
-    const taskCreated = createTaskUseCase.execute(task)
+		const createTaskUseCase = new CreateTaskUseCase(tasksRepository)
 
-    expect(taskCreated.id).toEqual(expect.any(String))
-  })
+		const taskCreated = await createTaskUseCase.execute(task)
+
+		expect(taskCreated.id).toEqual(expect.any(String))
+	})
 })
