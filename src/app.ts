@@ -5,11 +5,13 @@ import { router } from './http/routes'
 
 export const app = express()
 
+app.use(express.json())
+
 app.use(router)
 
 app.get('/', async (request, reply) => {
 	/*
-    #swagger,tags = ['Health']
+    #swagger.tags = ['Status']
     #swagger.description = "Return api status"
     #swagger.responses[200] = {
       description: "Success",

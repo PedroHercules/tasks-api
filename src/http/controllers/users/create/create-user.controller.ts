@@ -1,11 +1,13 @@
+import { randomUUID } from 'crypto'
 import { Request, Response } from 'express'
 
 export class CreateUserController {
 	async handle(request: Request, response: Response) {
+		const body = request.body
 		return response.status(201).json({
 			user: {
-				name: 'Json Doe',
-				email: 'jhondoe@email.com',
+				id: randomUUID(),
+				...body,
 			},
 		})
 	}

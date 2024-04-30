@@ -13,6 +13,9 @@
   "paths": {
     "/": {
       "get": {
+        "tags": [
+          "Status"
+        ],
         "description": "Return api status",
         "responses": {
           "200": {
