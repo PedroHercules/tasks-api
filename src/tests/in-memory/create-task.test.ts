@@ -1,5 +1,5 @@
-import { TasksRepositoryContract } from '@/application/repositories/contracts/tasks/tasks.repository'
-import { TasksRepository } from '@/application/repositories/in-memory/tasks.repository'
+import { TasksRepositoryContract } from '@/application/repositories/contracts/tasks.repository'
+import { TasksRepository } from '@/application/repositories/implementations/in-memory/tasks.repository'
 import { describe, expect, it } from 'vitest'
 
 class CreateTaskUseCase {

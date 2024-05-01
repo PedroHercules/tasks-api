@@ -8,7 +8,12 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
     "swagger": "tsx swagger.ts",
-    "test:memory": "vitest run --dir src/tests/in-memory"
+    "test:memory": "vitest run --dir src/tests/in-memory",
+    "client:generate:pg": "prisma generate --schema ./prisma/postgresql/schema.prisma",
+    "migration:generate:pg": "prisma migrate dev --schema ./prisma/postgresql/schema.prisma",
+    "migration:apply:pg": "prisma migrate deploy --schema ./prisma/postgresql/schema.prisma",
+    "reset:database:pg": "prisma migrate reset --schema ./prisma/postgresql/schema.prisma",
+    "prisma:studio:pg": "prisma studio --schema ./prisma/postgresql/schema.prisma"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "eslint": "^9.0.0",
+    "prisma": "^5.13.0",
     "tsup": "^8.0.2",
     "tsx": "^4.7.2",
     "typescript": "^5.4.5",
@@ -28,10 +34,13 @@
   "dependencies": {
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
+    "@prisma/client": "^5.13.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "fastify": "^4.26.2",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.0",
-    "vitest": "^1.5.0"
+    "vitest": "^1.5.0",
+    "zod": "^3.23.5"
   }
 }

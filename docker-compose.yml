@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  tasks_db:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    environment:
+      POSTGRESQL_USERNAME: ${DB_USERNAME}
+      POSTGRESQL_PASSWORD: ${DB_PASSWORD}
+      POSTGRESQL_DATABASE: ${DB_NAME}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '50MB'

@@ -1,4 +1,3 @@
-import { createUserController } from '@/http/controllers/users/create/make-create-user-controller.factory'
 import { Router } from 'express'
 
 export const usersRouter = Router()
@@ -28,5 +27,5 @@ usersRouter.post('/register', (request, response) => {
 				}
 			}
 		*/
-	return createUserController(request, response)
+	return response.status(200)
 })
