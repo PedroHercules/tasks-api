@@ -22,8 +22,15 @@ export class TasksRepository implements TasksRepositoryContract {
 		})
 	}
 
-	async fetch(): Promise<TaskOutput[]> {
-		throw new Error('Not implemented')
+	async fetch(userId: string): Promise<TaskOutput[]> {
+		return database.tasks.findMany({
+			where: {
+				userId,
+			},
+			orderBy: {
+				createdAt: 'desc',
+			},
+		})
 	}
 
 	async getById(id: string): Promise<TaskOutput | null> {

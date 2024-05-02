@@ -29,7 +29,7 @@ export class TasksRepository implements TasksRepositoryContract {
 		return input
 	}
 
-	fetch(): Promise<TaskOutput[]> {
+	fetch(userId: string): Promise<TaskOutput[]> {
 		throw new Error('Not implemented')
 	}
 
