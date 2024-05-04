@@ -16,3 +16,18 @@ services:
         limits:
           cpus: '0.2'
           memory: '50MB'
+  tasks_db_test:
+    image: bitnami/postgresql
+    ports:
+      - 5433:5432
+    env_file:
+      - .env.test
+    environment:
+      POSTGRESQL_USERNAME: ${DB_USERNAME}
+      POSTGRESQL_PASSWORD: ${DB_PASSWORD}
+      POSTGRESQL_DATABASE: ${DB_NAME}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '50MB'

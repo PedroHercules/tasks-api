@@ -155,7 +155,6 @@ const config = {
     "pg_db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "pg_db": {
       "url": {

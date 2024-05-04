@@ -1,4 +1,3 @@
-import { TasksRepositoryContract } from '@/application/repositories/contracts/tasks.repository'
 import { TasksRepository } from '@/application/repositories/implementations/in-memory/tasks.repository'
 import { CreateTaskService } from '@/application/services/tasks/create-task/create-task.service'
 import { describe, expect, it } from 'vitest'

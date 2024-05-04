@@ -23,3 +23,37 @@ jobs:
         run: pnpm build
       - name: Run tests in memory
         run: pnpm test:memory
+  integretion-tests:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: bitnami/postgresql
+        ports:
+          - 5432:5432
+        env:
+          POSTGRESQL_USERNAME: dev
+          POSTGRESQL_PASSWORD: develop
+          POSTGRESQL_DATABASE: tasks_db_test
+        deploy:
+          resources:
+            limits:
+              cpus: '0.2'
+              memory: '50MB'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build project
+        run: pnpm build
