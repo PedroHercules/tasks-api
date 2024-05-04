@@ -54,5 +54,7 @@ jobs:
         run: pnpm install
       - name: Build project
         run: pnpm build
+      - name: Client generate
+        run: pnpm client:generate:pg
       - name: Run integration tests
         run: pnpm test:integration
