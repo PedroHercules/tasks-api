@@ -7,7 +7,6 @@ const envSchema = z.object({
 		.default('development'),
 	PORT: z.coerce.number().default(3333),
 	DATABASE_URL: z.string(),
-	DATABASE_URL_TEST: z.string(),
 	DB_PASSWORD: z.string().optional(),
 	DB_USERNAME: z.string().optional(),
 	DB_NAME: z.string().optional(),
