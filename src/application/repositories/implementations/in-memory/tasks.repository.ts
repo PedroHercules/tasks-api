@@ -16,6 +16,10 @@ export class TasksRepository implements TasksRepositoryContract {
 		return TasksRepository.instance
 	}
 
+	public clearDb() {
+		this._database = []
+	}
+
 	public async create(data: TaskInput): Promise<TaskOutput> {
 		const input = {
 			id: randomUUID(),
@@ -29,8 +33,8 @@ export class TasksRepository implements TasksRepositoryContract {
 		return input
 	}
 
-	fetch(userId: string): Promise<TaskOutput[]> {
-		throw new Error('Not implemented')
+	async fetch(userId: string): Promise<TaskOutput[]> {
+		return this._database.filter((task) => task.userId === userId)
 	}
 
 	getById(id: string): Promise<TaskOutput | null> {

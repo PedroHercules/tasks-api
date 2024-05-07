@@ -2,7 +2,7 @@ import { TasksRepository } from '@/application/repositories/implementations/in-m
 import { CreateTaskService } from '@/application/services/tasks/create-task/create-task.service'
 import { describe, expect, it } from 'vitest'
 
-describe('Tasks services', () => {
+describe('Create task', () => {
 	it('should create a task', async () => {
 		const task = {
 			title: 'Task 1',
