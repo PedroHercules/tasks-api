@@ -34,13 +34,9 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
-    "@fastify/swagger": "^8.14.0",
-    "@fastify/swagger-ui": "^3.0.0",
     "@prisma/client": "^5.13.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "fastify": "^4.26.2",
-    "jest-mock-extended": "^3.0.7",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.0",
     "vitest": "^1.5.0",
