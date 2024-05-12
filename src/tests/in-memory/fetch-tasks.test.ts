@@ -85,7 +85,7 @@ describe('Fetch tasks', () => {
 	})
 
 	it('should be return tasks with status completed', async () => {
-		const taskCompletedOne = await createTask({
+		const taskOne = await createTask({
 			title: 'task-1',
 			description: 'task-1',
 			status: 'completed',
@@ -99,7 +99,7 @@ describe('Fetch tasks', () => {
 			userId: 'user-test-1',
 		})
 
-		const taskCompletedTwo = await createTask({
+		const taskTwo = await createTask({
 			title: 'task-3',
 			description: 'task-3',
 			status: 'completed',
@@ -115,11 +115,213 @@ describe('Fetch tasks', () => {
 		expect(tasks).toHaveLength(2)
 		expect(tasks).toEqual([
 			expect.objectContaining({
-				title: taskCompletedOne.title,
+				title: taskOne.title,
 			}),
 			expect.objectContaining({
-				title: taskCompletedTwo.title,
+				title: taskTwo.title,
 			}),
 		])
+	})
+
+	it('should be return tasks with status in progress', async () => {
+		const taskOne = await createTask({
+			title: 'task-1',
+			description: 'task-1',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-2',
+			description: 'task-2',
+			status: 'pending',
+			userId: 'user-test-1',
+		})
+
+		const taskTwo = await createTask({
+			title: 'task-3',
+			description: 'task-3',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		const fetchTasksByUserService = new FetchTasksByUserService(tasksRepository)
+
+		const tasks = await fetchTasksByUserService.execute('user-test-1', {
+			status: 'in_progress',
+		})
+
+		expect(tasks).toHaveLength(2)
+		expect(tasks).toEqual([
+			expect.objectContaining({
+				title: taskOne.title,
+			}),
+			expect.objectContaining({
+				title: taskTwo.title,
+			}),
+		])
+	})
+
+	it('should be return tasks with status failed', async () => {
+		const taskOne = await createTask({
+			title: 'task-1',
+			description: 'task-1',
+			status: 'failed',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-2',
+			description: 'task-2',
+			status: 'pending',
+			userId: 'user-test-1',
+		})
+
+		const taskTwo = await createTask({
+			title: 'task-3',
+			description: 'task-3',
+			status: 'failed',
+			userId: 'user-test-1',
+		})
+
+		const fetchTasksByUserService = new FetchTasksByUserService(tasksRepository)
+
+		const tasks = await fetchTasksByUserService.execute('user-test-1', {
+			status: 'failed',
+		})
+
+		expect(tasks).toHaveLength(2)
+		expect(tasks).toEqual([
+			expect.objectContaining({
+				title: taskOne.title,
+			}),
+			expect.objectContaining({
+				title: taskTwo.title,
+			}),
+		])
+	})
+
+	it('should be return empty tasks with status completed', async () => {
+		await createTask({
+			title: 'task-1',
+			description: 'task-1',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-2',
+			description: 'task-2',
+			status: 'pending',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-3',
+			description: 'task-3',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		const fetchTasksByUserService = new FetchTasksByUserService(tasksRepository)
+
+		const tasks = await fetchTasksByUserService.execute('user-test-1', {
+			status: 'completed',
+		})
+
+		expect(tasks).toHaveLength(0)
+	})
+
+	it('should be return empty tasks with status pending', async () => {
+		await createTask({
+			title: 'task-1',
+			description: 'task-1',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-2',
+			description: 'task-2',
+			status: 'failed',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-3',
+			description: 'task-3',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		const fetchTasksByUserService = new FetchTasksByUserService(tasksRepository)
+
+		const tasks = await fetchTasksByUserService.execute('user-test-1', {
+			status: 'pending',
+		})
+
+		expect(tasks).toHaveLength(0)
+	})
+
+	it('should be return empty tasks with status in progress', async () => {
+		await createTask({
+			title: 'task-1',
+			description: 'task-1',
+			status: 'failed',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-2',
+			description: 'task-2',
+			status: 'pending',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-3',
+			description: 'task-3',
+			status: 'completed',
+			userId: 'user-test-1',
+		})
+
+		const fetchTasksByUserService = new FetchTasksByUserService(tasksRepository)
+
+		const tasks = await fetchTasksByUserService.execute('user-test-1', {
+			status: 'in_progress',
+		})
+
+		expect(tasks).toHaveLength(0)
+	})
+
+	it('should be return empty tasks with status failed', async () => {
+		await createTask({
+			title: 'task-1',
+			description: 'task-1',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-2',
+			description: 'task-2',
+			status: 'pending',
+			userId: 'user-test-1',
+		})
+
+		await createTask({
+			title: 'task-3',
+			description: 'task-3',
+			status: 'in_progress',
+			userId: 'user-test-1',
+		})
+
+		const fetchTasksByUserService = new FetchTasksByUserService(tasksRepository)
+
+		const tasks = await fetchTasksByUserService.execute('user-test-1', {
+			status: 'failed',
+		})
+
+		expect(tasks).toHaveLength(0)
 	})
 })
