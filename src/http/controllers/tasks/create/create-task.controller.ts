@@ -1,8 +1,8 @@
-import { CreateTaskServiceContract } from '@/application/services/tasks/create-task/create-task.service'
+import { CreateTaskServiceType } from '@/application/services/tasks/create-task/create-task.service'
 import { Request, Response } from 'express'
 
 export class CreateTaskController {
-	constructor(private createTaskService: CreateTaskServiceContract) {}
+	constructor(private createTaskService: CreateTaskServiceType) {}
 	async handle(request: Request, response: Response) {
 		const body = request.body
 

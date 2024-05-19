@@ -1,7 +1,7 @@
 import { TasksRepositoryContract } from '@/application/repositories/contracts/tasks.repository'
-import { CreateTaskDTO, TaskResponse } from '../types/task'
+import { CreateTaskDTO, TaskResponse } from '../../../dtos/tasks/task'
 
-export type CreateTaskServiceContract = (
+export type CreateTaskServiceType = (
 	data: CreateTaskDTO,
 ) => Promise<TaskResponse>
 

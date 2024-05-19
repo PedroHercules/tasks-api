@@ -1,18 +1,9 @@
 import { TasksRepositoryContract } from '@/application/repositories/contracts/tasks.repository'
 import { TasksRepository } from '@/application/repositories/implementations/in-memory/tasks.repository'
 import { TasksFilters } from '@/application/repositories/types/tasks'
+import { FetchTasksByUserService } from '@/application/services/tasks/fetch-user-tasks/fetch-user-tasks.service'
 import { createTask } from '@/helpers/tests/tasks/create-task'
 import { describe, expect, it, afterEach } from 'vitest'
-
-class FetchTasksByUserService {
-	constructor(private tasksRepository: TasksRepositoryContract) {}
-
-	async execute(userId: string, filters?: TasksFilters) {
-		const tasks = await this.tasksRepository.fetch(userId, filters)
-
-		return tasks
-	}
-}
 
 const tasksRepository = TasksRepository.getInstance()
 
